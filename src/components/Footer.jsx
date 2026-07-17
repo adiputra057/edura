@@ -187,16 +187,6 @@ export default function Footer({ onAdminClick }) {
               <a href="#" className="hover:text-primary-500 transition-colors">Syarat & Ketentuan</a>
             </div>
 
-            {/* Social Icons */}
-            <div className="flex items-center space-x-4">
-              <a href="https://edura.vercel.app" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-primary-500 hover:bg-gray-50 rounded-full transition-all">
-                <Globe size={18} />
-              </a>
-              <a href="mailto:gedeadiputra14@gmail.com" className="p-2 text-gray-400 hover:text-primary-500 hover:bg-gray-50 rounded-full transition-all">
-                <Mail size={18} />
-              </a>
-            </div>
-
           </div>
         </div>
       </footer>
