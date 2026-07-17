@@ -171,21 +171,14 @@ export default function Footer({ onAdminClick }) {
       {/* Main Footer matching the design mockup */}
       <footer className="py-12 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col items-center justify-center text-center gap-3">
             
             {/* Logo and copyright */}
-            <div className="flex flex-col items-center md:items-start space-y-3">
-              <img src={logo} alt="EDURA Logo" className="h-11 w-auto object-contain" />
-              <p className="text-xs text-gray-400">
-                &copy; {new Date().getFullYear()} EDURA. Hak Cipta Dilindungi.
-              </p>
-            </div>
+            <img src={logo} alt="EDURA Logo" className="h-11 w-auto object-contain" />
+            <p className="text-xs text-gray-400">
+              &copy; {new Date().getFullYear()} EDURA. Hak Cipta Dilindungi.
+            </p>
 
-            {/* Links */}
-            <div className="flex items-center space-x-8 text-xs font-medium text-gray-500">
-              <a href="#" className="hover:text-primary-500 transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="hover:text-primary-500 transition-colors">Syarat & Ketentuan</a>
-            </div>
 
           </div>
         </div>
