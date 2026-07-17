@@ -63,7 +63,15 @@ export default function App() {
     const stored = localStorage.getItem('edura_products');
     if (stored) {
       try {
-        setProducts(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        // Jika jumlah produk yang tersimpan kurang dari default baru (misal ditambahkan POS & Absensi),
+        // otomatis reset/perbarui localStorage agar produk baru langsung tampil.
+        if (parsed.length < defaultProducts.length) {
+          setProducts(defaultProducts);
+          localStorage.setItem('edura_products', JSON.stringify(defaultProducts));
+        } else {
+          setProducts(parsed);
+        }
       } catch (err) {
         console.error('Error parsing stored products', err);
         setProducts(defaultProducts);
