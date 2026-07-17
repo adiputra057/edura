@@ -66,12 +66,14 @@ export default function AdminLogin({ onLogin, onCancel }) {
 
     if (isConfigured) {
       // Send real email using user's EmailJS config hardcoded in the file
+      const expiryTime = new Date(Date.now() + 15 * 60 * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID_OTP,
         {
-          to_email: 'gedeadiputra14@gmail.com',
-          otp_code: code,
+          email: 'gedeadiputra14@gmail.com',
+          passcode: code,
+          time: expiryTime,
         },
         EMAILJS_CONFIG.PUBLIC_KEY
       ).then(
