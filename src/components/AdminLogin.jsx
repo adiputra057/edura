@@ -3,14 +3,7 @@ import { Lock, Mail, ArrowLeft, AlertCircle, ShieldCheck, RefreshCw } from 'luci
 import emailjs from '@emailjs/browser';
 import logo from '../assets/logo.png';
 
-// =========================================================================
-// KONFIGURASI EMAILJS (OTP REAL GMAIL)
-// Silakan ganti nilai di bawah ini untuk mengaktifkan pengiriman OTP asli.
-// =========================================================================
-const EMAILJS_SERVICE_ID = 'service_oc57ujb';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Ganti dengan Template ID dari EmailJS
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';   // Ganti dengan Public Key dari EmailJS (Account -> API Keys)
-// =========================================================================
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 export default function AdminLogin({ onLogin, onCancel }) {
   const [email, setEmail] = useState('');
@@ -66,21 +59,21 @@ export default function AdminLogin({ onLogin, onCancel }) {
     
     // Check if EmailJS is configured for real delivery
     const isConfigured = 
-      EMAILJS_TEMPLATE_ID && 
-      EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID' && 
-      EMAILJS_PUBLIC_KEY && 
-      EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+      EMAILJS_CONFIG.TEMPLATE_ID_OTP && 
+      EMAILJS_CONFIG.TEMPLATE_ID_OTP !== 'YOUR_OTP_TEMPLATE_ID' && 
+      EMAILJS_CONFIG.PUBLIC_KEY && 
+      EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
 
     if (isConfigured) {
       // Send real email using user's EmailJS config hardcoded in the file
       emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_OTP,
         {
           to_email: 'gedeadiputra14@gmail.com',
           otp_code: code,
         },
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_CONFIG.PUBLIC_KEY
       ).then(
         (response) => {
           console.log('EmailJS Success:', response.status, response.text);
@@ -175,10 +168,10 @@ export default function AdminLogin({ onLogin, onCancel }) {
   };
 
   const isUsingRealEmail = 
-    EMAILJS_TEMPLATE_ID && 
-    EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID' && 
-    EMAILJS_PUBLIC_KEY && 
-    EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+    EMAILJS_CONFIG.TEMPLATE_ID_OTP && 
+    EMAILJS_CONFIG.TEMPLATE_ID_OTP !== 'YOUR_OTP_TEMPLATE_ID' && 
+    EMAILJS_CONFIG.PUBLIC_KEY && 
+    EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">

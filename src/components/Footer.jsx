@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Globe, Mail, Send, Check } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import logo from '../assets/logo.png';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 export default function Footer({ onAdminClick }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,14 +17,51 @@ export default function Footer({ onAdminClick }) {
       alert('Tolong lengkapi formulir kontak!');
       return;
     }
-    
-    setSubmitted(true);
-    setName('');
-    setEmail('');
-    setMessage('');
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 5000);
+
+    const isConfigured = 
+      EMAILJS_CONFIG.TEMPLATE_ID_CONTACT && 
+      EMAILJS_CONFIG.TEMPLATE_ID_CONTACT !== 'YOUR_CONTACT_TEMPLATE_ID' && 
+      EMAILJS_CONFIG.PUBLIC_KEY && 
+      EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+
+    if (isConfigured) {
+      setLoading(true);
+      emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
+        {
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_email: 'gedeadiputra14@gmail.com',
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      ).then(
+        () => {
+          setLoading(false);
+          setSubmitted(true);
+          setName('');
+          setEmail('');
+          setMessage('');
+          setTimeout(() => setSubmitted(false), 5000);
+        },
+        (err) => {
+          setLoading(false);
+          console.error('EmailJS Error:', err);
+          alert('Gagal mengirim pesan, silakan coba lagi atau hubungi langsung via WhatsApp.');
+        }
+      );
+    } else {
+      // Fallback simulated submit
+      setSubmitted(true);
+      setName('');
+      setEmail('');
+      setMessage('');
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+      alert('[Simulasi] Pesan Anda berhasil dikirim (Konfigurasikan TEMPLATE_ID_CONTACT di src/config/emailjs.js untuk pengiriman email asli ke Anda).');
+    }
   };
 
   return (
@@ -111,10 +151,11 @@ export default function Footer({ onAdminClick }) {
 
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
+                      disabled={loading}
+                      className={`inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
                     >
-                      <Send size={16} />
-                      Kirim Pesan
+                      <Send size={16} className={loading ? 'animate-spin' : ''} />
+                      {loading ? 'Mengirim...' : 'Kirim Pesan'}
                     </button>
                   </form>
                 )}
