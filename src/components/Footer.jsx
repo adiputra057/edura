@@ -32,6 +32,8 @@ export default function Footer({ onAdminClick }) {
         {
           from_name: name,
           from_email: email,
+          name: name,
+          email: email,
           message: message,
           to_email: 'gedeadiputra14@gmail.com',
         },
