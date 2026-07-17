@@ -1,5 +1,5 @@
 import React from 'react';
-import { Monitor, Smartphone, TrendingUp, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Monitor, Smartphone, TrendingUp, ShieldCheck, HeartHandshake, Code } from 'lucide-react';
 
 export default function Services() {
   const services = [
@@ -11,9 +11,9 @@ export default function Services() {
       border: 'hover:border-blue-200'
     },
     {
-      icon: <Smartphone className="w-6 h-6 text-indigo-500" />,
-      title: 'App Development',
-      desc: 'Pengembangan aplikasi mobile kustom untuk iOS dan Android dengan performa tinggi.',
+      icon: <Code className="w-6 h-6 text-indigo-500" />,
+      title: 'Web Development',
+      desc: 'Pengembangan website kustom dengan teknologi modern, performa tinggi, dan skalabilitas terbaik.',
       bg: 'bg-indigo-50/50',
       border: 'hover:border-indigo-200'
     },
