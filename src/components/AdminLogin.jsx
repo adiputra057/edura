@@ -220,7 +220,7 @@ export default function AdminLogin({ onLogin, onCancel }) {
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center justify-center text-center z-10">
-        <img src={logo} alt="EDURA Logo" className="h-10 w-auto object-contain mb-2" />
+        <img src={logo} alt="EDURA Logo" className="h-16 w-auto object-contain mb-2" />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           {step === 'credentials' ? 'Portal Admin' : 'Verifikasi OTP'}
         </h2>

@@ -31,7 +31,7 @@ export default function Navbar({ currentView, setView, activeSection, scrollToSe
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 cursor-pointer" onClick={() => handleLinkClick('home')}>
-            <img src={logo} alt="EDURA Logo" className="h-9 w-auto object-contain" />
+            <img src={logo} alt="EDURA Logo" className="h-13 w-auto object-contain" />
           </div>
 
           {/* Desktop Navigation Links */}

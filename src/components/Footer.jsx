@@ -132,7 +132,7 @@ export default function Footer({ onAdminClick }) {
             
             {/* Logo and copyright */}
             <div className="flex flex-col items-center md:items-start space-y-3">
-              <img src={logo} alt="EDURA Logo" className="h-8 w-auto object-contain" />
+              <img src={logo} alt="EDURA Logo" className="h-11 w-auto object-contain" />
               <p className="text-xs text-gray-400">
                 &copy; {new Date().getFullYear()} EDURA. Hak Cipta Dilindungi.
               </p>
