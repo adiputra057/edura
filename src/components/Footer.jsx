@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Globe, Mail, Send, Check } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 export default function Footer({ onAdminClick }) {
   const [name, setName] = useState('');
@@ -130,10 +131,8 @@ export default function Footer({ onAdminClick }) {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             
             {/* Logo and copyright */}
-            <div className="flex flex-col items-center md:items-start space-y-2">
-              <span className="text-xl font-extrabold tracking-tight text-primary-500 font-sans">
-                EDURA
-              </span>
+            <div className="flex flex-col items-center md:items-start space-y-3">
+              <img src={logo} alt="EDURA Logo" className="h-8 w-auto object-contain" />
               <p className="text-xs text-gray-400">
                 &copy; {new Date().getFullYear()} EDURA. Hak Cipta Dilindungi.
               </p>

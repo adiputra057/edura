@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, LayoutDashboard, User } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 export default function Navbar({ currentView, setView, activeSection, scrollToSection, isAdmin }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +31,7 @@ export default function Navbar({ currentView, setView, activeSection, scrollToSe
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 cursor-pointer" onClick={() => handleLinkClick('home')}>
-            <span className="text-2xl font-extrabold tracking-tight text-primary-500 font-sans">
-              EDURA
-            </span>
+            <img src={logo} alt="EDURA Logo" className="h-9 w-auto object-contain" />
           </div>
 
           {/* Desktop Navigation Links */}

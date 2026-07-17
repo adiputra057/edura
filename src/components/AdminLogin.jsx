@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Lock, Mail, ArrowLeft, AlertCircle, ShieldCheck, RefreshCw } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import logo from '../assets/logo.png';
 
 // =========================================================================
 // KONFIGURASI EMAILJS (OTP REAL GMAIL)
@@ -218,10 +219,8 @@ export default function AdminLogin({ onLogin, onCancel }) {
         </button>
       </div>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10">
-        <span className="text-3xl font-extrabold tracking-tight text-primary-500 font-sans">
-          EDURA
-        </span>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center justify-center text-center z-10">
+        <img src={logo} alt="EDURA Logo" className="h-10 w-auto object-contain mb-2" />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           {step === 'credentials' ? 'Portal Admin' : 'Verifikasi OTP'}
         </h2>
