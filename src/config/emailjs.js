@@ -6,7 +6,7 @@ export const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_oc57ujb',
 
   // Contoh hasil pengisian Template ID OTP Anda
-  TEMPLATE_ID_OTP: 'template_otp1234',
+  TEMPLATE_ID_OTP: 'template_e05mvbn',
 
   // Contoh hasil pengisian Template ID Kontak Anda
   TEMPLATE_ID_CONTACT: 'template_ihac8u9',
