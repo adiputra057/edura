@@ -13,6 +13,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
   const [description, setDescription] = useState('');
   const [features, setFeatures] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]);
+  const [techStack, setTechStack] = useState('');
 
   const handleFileUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -81,6 +82,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
     setPrice('');
     setDescription('');
     setUploadedImages([]);
+    setTechStack('');
     setFeatures('Desain modern & responsif\nFitur SEO Friendly\nIntegrasi Chat WA');
     setIsFormOpen(true);
   };
@@ -92,6 +94,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
     setPrice(product.price);
     setDescription(product.description);
     setUploadedImages(product.images || [product.image]);
+    setTechStack(product.techStack ? product.techStack.join(', ') : '');
     setFeatures(product.features ? product.features.join('\n') : '');
     setIsFormOpen(true);
   };
@@ -123,6 +126,11 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
       .map(f => f.trim())
       .filter(f => f.length > 0);
 
+    const techStackList = techStack
+      .split(',')
+      .map(t => t.trim())
+      .filter(t => t.length > 0);
+
     const productPayload = {
       title,
       category,
@@ -130,7 +138,8 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
       description,
       image: finalImage,
       images: finalImages,
-      features: featuresList
+      features: featuresList,
+      techStack: techStackList
     };
 
     if (editingProduct) {
@@ -249,7 +258,16 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
                           />
                           <div className="min-w-0">
                             <p className="font-bold text-gray-900 truncate max-w-xs">{product.title}</p>
-                            <p className="text-xs text-gray-500 truncate max-w-sm">{product.description}</p>
+                            <p className="text-xs text-gray-500 truncate max-w-sm mb-1.5">{product.description}</p>
+                            {product.techStack && product.techStack.length > 0 && (
+                              <div className="flex flex-wrap gap-1">
+                                {product.techStack.map(tech => (
+                                  <span key={tech} className="inline-block text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-150">
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </td>
@@ -350,6 +368,23 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
+                </div>
+
+                {/* Bahasa / Teknologi */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                    Bahasa / Teknologi (Pisahkan dengan koma)
+                  </label>
+                  <input
+                    type="text"
+                    value={techStack}
+                    onChange={(e) => setTechStack(e.target.value)}
+                    placeholder="Contoh: React, Laravel, PHP, MySQL, Tailwind"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  />
+                  <p className="text-[10px] text-gray-400 mt-1">
+                    Gunakan koma sebagai pemisah. Pilihan populer: React, Laravel, PHP, MySQL, Tailwind, Bootstrap, JS, Vite.
+                  </p>
                 </div>
 
                 {/* Image Selection Type - Upload Only */}
