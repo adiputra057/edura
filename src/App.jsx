@@ -59,24 +59,27 @@ export default function App() {
   }, [products, currentView, showAllProducts]);
 
   // Load products from localStorage or use defaults
+  // Menggunakan versi migrasi agar data default hanya di-reset sekali saat ada update struktur,
+  // dan TIDAK mereset ulang setiap kali user menghapus/mengubah produk dari CMS.
+  const PRODUCTS_VERSION = '2'; // Naikkan angka ini jika ingin paksa reset data ke default baru
+
   useEffect(() => {
+    const storedVersion = localStorage.getItem('edura_products_version');
     const stored = localStorage.getItem('edura_products');
-    if (stored) {
+
+    // Jika versi belum sama, reset ke default (migrasi data baru)
+    if (storedVersion !== PRODUCTS_VERSION) {
+      setProducts(defaultProducts);
+      localStorage.setItem('edura_products', JSON.stringify(defaultProducts));
+      localStorage.setItem('edura_products_version', PRODUCTS_VERSION);
+    } else if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // Jika jumlah produk yang tersimpan kurang dari default baru (misal ditambahkan POS & Absensi),
-        // atau jika ada produk yang belum memiliki data deliverables,
-        // otomatis reset/perbarui localStorage agar data baru langsung tampil.
-        const hasMissingDeliverables = parsed.some(p => !p.deliverables);
-        if (parsed.length < defaultProducts.length || hasMissingDeliverables) {
-          setProducts(defaultProducts);
-          localStorage.setItem('edura_products', JSON.stringify(defaultProducts));
-        } else {
-          setProducts(parsed);
-        }
+        setProducts(parsed);
       } catch (err) {
         console.error('Error parsing stored products', err);
         setProducts(defaultProducts);
+        localStorage.setItem('edura_products', JSON.stringify(defaultProducts));
       }
     } else {
       setProducts(defaultProducts);
