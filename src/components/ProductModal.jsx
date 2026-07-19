@@ -132,8 +132,8 @@ export default function ProductModal({ product, onClose }) {
       />
 
       {/* Modal contents wrapper */}
-      <div className="flex min-h-screen items-end sm:items-center justify-center p-0 sm:p-6 text-center">
-        <div className="relative transform overflow-hidden rounded-t-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl sm:my-8 animate-scale-up border border-gray-100 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+      <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 text-center">
+        <div className="relative transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl my-4 sm:my-8 animate-scale-up border border-gray-100 max-h-[90vh] overflow-y-auto">
           
           {/* Close button */}
           <button
