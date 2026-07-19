@@ -12,6 +12,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [features, setFeatures] = useState('');
+  const [deliverables, setDeliverables] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]);
   const [techStack, setTechStack] = useState('');
 
@@ -84,6 +85,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
     setUploadedImages([]);
     setTechStack('');
     setFeatures('Desain modern & responsif\nFitur SEO Friendly\nIntegrasi Chat WA');
+    setDeliverables('Full Source Code\nDokumentasi Panduan');
     setIsFormOpen(true);
   };
 
@@ -96,6 +98,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
     setUploadedImages(product.images || [product.image]);
     setTechStack(product.techStack ? product.techStack.join(', ') : '');
     setFeatures(product.features ? product.features.join('\n') : '');
+    setDeliverables(product.deliverables ? product.deliverables.join('\n') : '');
     setIsFormOpen(true);
   };
 
@@ -131,6 +134,11 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
       .map(t => t.trim())
       .filter(t => t.length > 0);
 
+    const deliverablesList = deliverables
+      .split('\n')
+      .map(d => d.trim())
+      .filter(d => d.length > 0);
+
     const productPayload = {
       title,
       category,
@@ -139,6 +147,7 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
       image: finalImage,
       images: finalImages,
       features: featuresList,
+      deliverables: deliverablesList,
       techStack: techStackList
     };
 
@@ -457,6 +466,23 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
                     rows="4"
                     className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   />
+                </div>
+
+                {/* Deliverables list */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                    Yang Didapatkan / Deliverables (Satu Per Baris)
+                  </label>
+                  <textarea
+                    value={deliverables}
+                    onChange={(e) => setDeliverables(e.target.value)}
+                    placeholder="Contoh:&#10;Full Source Code&#10;Dokumentasi Panduan&#10;Database MySQL (.sql)&#10;Akses Panel Demo"
+                    rows="4"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  />
+                  <p className="text-[10px] text-gray-400 mt-1">
+                    Isi apa saja yang akan diterima klien setelah pembelian. Satu item per baris.
+                  </p>
                 </div>
 
                 {/* Submit / Cancel Actions */}

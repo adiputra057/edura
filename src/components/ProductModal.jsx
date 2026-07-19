@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Check, MessageSquare, ChevronLeft, ChevronRight, Package } from 'lucide-react';
 
 const TECH_MAP = {
   React: {
@@ -264,6 +264,30 @@ export default function ProductModal({ product, onClose }) {
                               <Check size={12} className="stroke-[3]" />
                             </span>
                             <span className="leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Deliverables - Yang Anda Dapatkan */}
+                  {product.deliverables && product.deliverables.length > 0 && (
+                    <div className="space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-4">
+                      <div className="flex items-center gap-2">
+                        <span className="p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
+                          <Package size={14} className="stroke-[2.5]" />
+                        </span>
+                        <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                          Yang Anda Dapatkan:
+                        </p>
+                      </div>
+                      <ul className="space-y-2">
+                        {product.deliverables.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 text-xs text-gray-600">
+                            <span className="p-1 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
+                              <Check size={10} className="stroke-[3]" />
+                            </span>
+                            <span className="leading-relaxed font-medium">{item}</span>
                           </li>
                         ))}
                       </ul>

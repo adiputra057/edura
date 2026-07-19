@@ -21,6 +21,13 @@ export const defaultProducts = [
       'Halaman checkout aman',
       'Halaman dashboard admin',
       'Dukungan teknis 3 bulan'
+    ],
+    deliverables: [
+      'Full Source Code (Frontend & Backend)',
+      'Struktur Database MySQL (.sql)',
+      'Dokumentasi Panduan Instalasi & Penggunaan',
+      'Aset Desain & Logo Digital',
+      'Akses Akun Admin Demo'
     ]
   },
   {
@@ -39,6 +46,13 @@ export const defaultProducts = [
       'Ekspor laporan (PDF/Excel)',
       'Keamanan tingkat tinggi & enkripsi data',
       'Dukungan teknis 6 bulan'
+    ],
+    deliverables: [
+      'Full Source Code (React Vite)',
+      'Dokumentasi API Integration',
+      'Dokumentasi Panduan Deployment',
+      'File Konfigurasi System',
+      'Akses Panel Demo/Staging'
     ]
   },
   {
@@ -57,6 +71,13 @@ export const defaultProducts = [
       'Aset media sosial & template desain',
       'Desain kartu nama & kop surat',
       'File master resolusi tinggi (SVG/AI/Figma)'
+    ],
+    deliverables: [
+      'File Master Desain (Figma / Adobe Illustrator)',
+      'File Aset Resolusi Tinggi (SVG, PNG, PDF)',
+      'Dokumen Brand Style Guide (PDF)',
+      'Template Mockup Media Sosial',
+      'Font System & Color Codes'
     ]
   },
   {
@@ -75,6 +96,13 @@ export const defaultProducts = [
       'Laporan penjualan harian, bulanan & tahunan',
       'Grafik analisis keuntungan',
       'Desain responsif untuk PC, Tablet & Mobile'
+    ],
+    deliverables: [
+      'Full Source Code (Laravel PHP)',
+      'Struktur Database MySQL (.sql)',
+      'Dokumentasi Manual Pengoperasian (PDF)',
+      'Script Printer Driver Config',
+      'Akses Akun Kasir & Admin Demo'
     ]
   },
   {
@@ -93,6 +121,13 @@ export const defaultProducts = [
       'Rekap absensi otomatis & ekspor Excel',
       'Dashboard admin & panel karyawan',
       'Notifikasi WhatsApp terintegrasi'
+    ],
+    deliverables: [
+      'Full Source Code (Laravel & Tailwind)',
+      'Struktur Database MySQL (.sql)',
+      'Dokumentasi Panduan Setup Geofencing & API Face Detection',
+      'Akses Panel Admin & Karyawan Demo',
+      'File Panduan Integrasi WhatsApp Gateway'
     ]
   }
 ];
