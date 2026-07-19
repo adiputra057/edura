@@ -98,6 +98,14 @@ export default function ProductModal({ product, onClose }) {
     return () => clearInterval(timer);
   }, [images.length]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   const formatPrice = (value) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -133,7 +141,7 @@ export default function ProductModal({ product, onClose }) {
 
       {/* Modal contents wrapper */}
       <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 text-center">
-        <div className="relative transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl my-4 sm:my-8 animate-scale-up border border-gray-100 max-h-[90vh] overflow-y-auto">
+        <div className="relative transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl my-4 sm:my-8 animate-scale-up border border-gray-100 max-h-[90vh] overflow-y-auto no-scrollbar">
           
           {/* Close button */}
           <button
