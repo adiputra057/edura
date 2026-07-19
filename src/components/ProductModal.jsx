@@ -132,24 +132,24 @@ export default function ProductModal({ product, onClose }) {
       />
 
       {/* Modal contents wrapper */}
-      <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 text-center">
-        <div className="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl my-8 animate-scale-up border border-gray-100">
+      <div className="flex min-h-screen items-end sm:items-center justify-center p-0 sm:p-6 text-center">
+        <div className="relative transform overflow-hidden rounded-t-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl sm:my-8 animate-scale-up border border-gray-100 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
           
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 z-20 p-2.5 text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white backdrop-blur shadow-sm rounded-full transition-colors border border-gray-100"
+            className="absolute top-3 right-3 sm:top-5 sm:right-5 z-20 p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white backdrop-blur shadow-sm rounded-full transition-colors border border-gray-100"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
             
-            {/* Left: Product Images Slideshow (Large Layout 7 cols) */}
-            <div className="relative lg:col-span-7 bg-white flex items-center justify-center overflow-hidden min-h-[320px] sm:min-h-[400px] lg:min-h-[520px] group border-r border-gray-100">
+            {/* Left: Product Images Slideshow */}
+            <div className="relative lg:col-span-7 bg-white flex items-center justify-center overflow-hidden h-[220px] sm:h-[320px] lg:min-h-[520px] group lg:border-r border-b lg:border-b-0 border-gray-100">
               
               {/* Image Frame */}
-              <div className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-4">
+              <div className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4">
                 <img
                   src={images[currentIdx]}
                   alt={`${product.title} view ${currentIdx + 1}`}
@@ -162,24 +162,24 @@ export default function ProductModal({ product, onClose }) {
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-4 p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+                    className="absolute left-2 sm:left-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
                     aria-label="Previous image"
                   >
-                    <ChevronLeft size={20} className="stroke-[3]" />
+                    <ChevronLeft size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-4 p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+                    className="absolute right-2 sm:right-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
                     aria-label="Next image"
                   >
-                    <ChevronRight size={20} className="stroke-[3]" />
+                    <ChevronRight size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
                   </button>
                 </>
               )}
 
               {/* Navigation Indicators (Dots at bottom) */}
               {images.length > 1 && (
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
                   {images.map((_, index) => (
                     <button
                       key={index}
@@ -187,10 +187,10 @@ export default function ProductModal({ product, onClose }) {
                         e.stopPropagation();
                         setCurrentIdx(index);
                       }}
-                      className={`h-2.5 rounded-full transition-all duration-300 ${
+                      className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                         currentIdx === index 
-                          ? 'w-6 bg-primary-500 shadow-sm shadow-primary-300' 
-                          : 'w-2.5 bg-white/60 hover:bg-white'
+                          ? 'w-5 sm:w-6 bg-primary-500 shadow-sm shadow-primary-300' 
+                          : 'w-2 sm:w-2.5 bg-gray-300/60 hover:bg-gray-400'
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -199,30 +199,30 @@ export default function ProductModal({ product, onClose }) {
               )}
             </div>
 
-            {/* Right: Content details (Compact Layout 5 cols) */}
-            <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between h-full min-h-[400px] lg:min-h-[520px]">
-              <div className="space-y-6">
+            {/* Right: Content details */}
+            <div className="lg:col-span-5 p-5 sm:p-8 lg:p-10 flex flex-col justify-between">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <span className="text-[10px] font-extrabold text-primary-500 uppercase tracking-widest bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-full">
+                  <span className="text-[10px] font-extrabold text-primary-500 uppercase tracking-widest bg-blue-50 border border-blue-100 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full">
                     {product.category}
                   </span>
-                  <h3 className="text-3xl font-extrabold text-gray-900 mt-4 leading-tight" id="modal-title">
+                  <h3 className="text-xl sm:text-3xl font-extrabold text-gray-900 mt-3 sm:mt-4 leading-tight" id="modal-title">
                     {product.title}
                   </h3>
-                  <p className="text-2xl font-bold text-primary-500 mt-2">
+                  <p className="text-lg sm:text-2xl font-bold text-primary-500 mt-1.5 sm:mt-2">
                     {formatPrice(product.price)}
                   </p>
                 </div>
 
-                <div className="space-y-5">
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                <div className="space-y-4 sm:space-y-5">
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
                     {product.description}
                   </p>
                   
                   {/* Technology Stack Badges */}
                   {product.techStack && product.techStack.length > 0 && (
                     <div className="space-y-2">
-                      <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                      <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
                         Teknologi Yang Digunakan:
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -240,7 +240,7 @@ export default function ProductModal({ product, onClose }) {
                           return (
                             <span
                               key={tech}
-                              className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-lg border ${info.color}`}
+                              className={`inline-flex items-center text-[10px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border ${info.color}`}
                             >
                               {info.icon}
                               {info.name}
@@ -253,15 +253,15 @@ export default function ProductModal({ product, onClose }) {
 
                   {/* Features list */}
                   {product.features && product.features.length > 0 && (
-                    <div className="space-y-3">
-                      <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    <div className="space-y-2 sm:space-y-3">
+                      <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
                         Fitur & Layanan Utama:
                       </p>
-                      <ul className="space-y-2.5">
+                      <ul className="space-y-1.5 sm:space-y-2.5">
                         {product.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-3 text-xs text-gray-500">
-                            <span className="p-1 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
-                              <Check size={12} className="stroke-[3]" />
+                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-500">
+                            <span className="p-0.5 sm:p-1 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
+                              <Check size={10} className="sm:w-3 sm:h-3 stroke-[3]" />
                             </span>
                             <span className="leading-relaxed">{feature}</span>
                           </li>
@@ -272,20 +272,20 @@ export default function ProductModal({ product, onClose }) {
 
                   {/* Deliverables - Yang Anda Dapatkan */}
                   {product.deliverables && product.deliverables.length > 0 && (
-                    <div className="space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-4">
+                    <div className="space-y-2 sm:space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-3 sm:p-4">
                       <div className="flex items-center gap-2">
-                        <span className="p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
-                          <Package size={14} className="stroke-[2.5]" />
+                        <span className="p-1 sm:p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
+                          <Package size={12} className="sm:w-3.5 sm:h-3.5 stroke-[2.5]" />
                         </span>
-                        <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                        <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
                           Yang Anda Dapatkan:
                         </p>
                       </div>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5 sm:space-y-2">
                         {product.deliverables.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3 text-xs text-gray-600">
-                            <span className="p-1 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
-                              <Check size={10} className="stroke-[3]" />
+                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-600">
+                            <span className="p-0.5 sm:p-1 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
+                              <Check size={9} className="sm:w-2.5 sm:h-2.5 stroke-[3]" />
                             </span>
                             <span className="leading-relaxed font-medium">{item}</span>
                           </li>
@@ -297,18 +297,18 @@ export default function ProductModal({ product, onClose }) {
               </div>
 
               {/* Action area */}
-              <div className="mt-10 pt-6 border-t border-gray-100 flex flex-col gap-3">
+              <div className="mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-gray-100 flex flex-col gap-2 sm:gap-3">
                 <button
                   onClick={handleWhatsAppClick}
-                  className="flex items-center justify-center gap-2 w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm px-6 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold text-xs sm:text-sm px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  <MessageSquare size={16} />
+                  <MessageSquare size={14} className="sm:w-4 sm:h-4" />
                   Hubungi Kami di WhatsApp
                 </button>
                 
                 <button
                   onClick={onClose}
-                  className="w-full text-center text-xs font-medium text-gray-400 hover:text-gray-600 py-2 transition-colors"
+                  className="w-full text-center text-[10px] sm:text-xs font-medium text-gray-400 hover:text-gray-600 py-1.5 sm:py-2 transition-colors"
                 >
                   Kembali
                 </button>
