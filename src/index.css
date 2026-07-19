@@ -23,12 +23,14 @@
   }
 }
 
-body {
+html, body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   scroll-behavior: smooth;
   background-color: #fcfcfd;
   color: #1f2937;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* Premium micro-interactions and visual styles */

@@ -145,102 +145,58 @@ export default function ProductModal({ product, onClose }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
             
-            {/* Left: Product Images Slideshow & Desktop Features/Deliverables */}
-            <div className="lg:col-span-7 flex flex-col lg:border-r border-b lg:border-b-0 border-gray-100">
+            {/* Left: Product Images Slideshow */}
+            <div className="relative lg:col-span-7 bg-white flex items-center justify-center overflow-hidden h-[220px] sm:h-[320px] lg:min-h-[520px] group lg:border-r border-b lg:border-b-0 border-gray-100">
               
-              {/* Image Frame Slideshow */}
-              <div className="relative bg-white flex items-center justify-center overflow-hidden h-[220px] sm:h-[320px] lg:h-[360px] group border-b border-gray-100">
-                <div className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4">
-                  <img
-                    src={images[currentIdx]}
-                    alt={`${product.title} view ${currentIdx + 1}`}
-                    className="w-full h-full object-contain select-none transition-all duration-500 ease-out"
-                  />
+              {/* Image Frame */}
+              <div className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4">
+                <img
+                  src={images[currentIdx]}
+                  alt={`${product.title} view ${currentIdx + 1}`}
+                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out"
+                />
+              </div>
+
+              {/* Slider Arrows (Only show if multiple images exist) */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrev}
+                    className="absolute left-2 sm:left-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-2 sm:right-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
+                  </button>
+                </>
+              )}
+
+              {/* Navigation Indicators (Dots at bottom) */}
+              {images.length > 1 && (
+                <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentIdx(index);
+                      }}
+                      className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
+                        currentIdx === index 
+                          ? 'w-5 sm:w-6 bg-primary-500 shadow-sm shadow-primary-300' 
+                          : 'w-2 sm:w-2.5 bg-gray-300/60 hover:bg-gray-400'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
                 </div>
-
-                {/* Slider Arrows (Only show if multiple images exist) */}
-                {images.length > 1 && (
-                  <>
-                    <button
-                      onClick={handlePrev}
-                      className="absolute left-2 sm:left-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      className="absolute right-2 sm:right-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
-                      aria-label="Next image"
-                    >
-                      <ChevronRight size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
-                    </button>
-                  </>
-                )}
-
-                {/* Navigation Indicators (Dots at bottom) */}
-                {images.length > 1 && (
-                  <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
-                    {images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCurrentIdx(index);
-                        }}
-                        className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
-                          currentIdx === index 
-                            ? 'w-5 sm:w-6 bg-primary-500 shadow-sm shadow-primary-300' 
-                            : 'w-2 sm:w-2.5 bg-gray-300/60 hover:bg-gray-400'
-                        }`}
-                        aria-label={`Go to slide ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Desktop view ONLY: Fitur (Kiri) & Deliverables (Kanan) sebaris dibawah gambar */}
-              <div className="hidden lg:grid lg:grid-cols-2 gap-6 p-8 bg-gray-50/40">
-                {/* Fitur & Layanan Utama */}
-                {product.features && product.features.length > 0 && (
-                  <div className="space-y-3">
-                    <p className="text-xs font-extrabold text-gray-900 uppercase tracking-wider border-l-2 border-emerald-500 pl-2">
-                      Fitur & Layanan Utama:
-                    </p>
-                    <ul className="space-y-2">
-                      {product.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs text-gray-500">
-                          <span className="p-0.5 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
-                            <Check size={10} className="stroke-[3]" />
-                          </span>
-                          <span className="leading-relaxed">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Yang Anda Dapatkan */}
-                {product.deliverables && product.deliverables.length > 0 && (
-                  <div className="space-y-3">
-                    <p className="text-xs font-extrabold text-gray-900 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
-                      Yang Anda Dapatkan:
-                    </p>
-                    <ul className="space-y-2">
-                      {product.deliverables.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs text-gray-600">
-                          <span className="p-0.5 rounded-full bg-amber-50 text-amber-500 flex-shrink-0 mt-0.5">
-                            <Package size={10} className="stroke-[2.5]" />
-                          </span>
-                          <span className="leading-relaxed font-medium">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-
+              )}
             </div>
 
             {/* Right: Content details */}
@@ -295,52 +251,48 @@ export default function ProductModal({ product, onClose }) {
                     </div>
                   )}
 
-                  {/* Mobile/Tablet view ONLY: Tampilkan Fitur & Deliverables bertumpuk di bawah deskripsi */}
-                  <div className="lg:hidden space-y-5 mt-4 pt-4 border-t border-gray-100">
-                    {/* Features list */}
-                    {product.features && product.features.length > 0 && (
-                      <div className="space-y-2.5">
-                        <p className="text-[10px] font-bold text-gray-900 uppercase tracking-wider">
-                          Fitur & Layanan Utama:
+                  {/* Features list */}
+                  {product.features && product.features.length > 0 && (
+                    <div className="space-y-2 sm:space-y-3">
+                      <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
+                        Fitur & Layanan Utama:
+                      </p>
+                      <ul className="space-y-1.5 sm:space-y-2.5">
+                        {product.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-500">
+                            <span className="p-0.5 sm:p-1 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
+                              <Check size={10} className="sm:w-3 sm:h-3 stroke-[3]" />
+                            </span>
+                            <span className="leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Deliverables - Yang Anda Dapatkan */}
+                  {product.deliverables && product.deliverables.length > 0 && (
+                    <div className="space-y-2 sm:space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-3 sm:p-4">
+                      <div className="flex items-center gap-2">
+                        <span className="p-1 sm:p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
+                          <Package size={12} className="sm:w-3.5 sm:h-3.5 stroke-[2.5]" />
+                        </span>
+                        <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
+                          Yang Anda Dapatkan:
                         </p>
-                        <ul className="space-y-1.5">
-                          {product.features.map((feature, i) => (
-                            <li key={i} className="flex items-start gap-2 text-[11px] text-gray-500">
-                              <span className="p-0.5 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
-                                <Check size={10} className="stroke-[3]" />
-                              </span>
-                              <span className="leading-relaxed">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
-                    )}
-
-                    {/* Deliverables - Yang Anda Dapatkan */}
-                    {product.deliverables && product.deliverables.length > 0 && (
-                      <div className="space-y-2.5 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-3">
-                        <div className="flex items-center gap-2">
-                          <span className="p-1 rounded-lg bg-amber-100/80 text-amber-600">
-                            <Package size={12} className="stroke-[2.5]" />
-                          </span>
-                          <p className="text-[10px] font-bold text-gray-900 uppercase tracking-wider">
-                            Yang Anda Dapatkan:
-                          </p>
-                        </div>
-                        <ul className="space-y-1.5">
-                          {product.deliverables.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-[11px] text-gray-600">
-                              <span className="p-0.5 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
-                                <Check size={9} className="stroke-[3]" />
-                              </span>
-                              <span className="leading-relaxed font-medium">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-
+                      <ul className="space-y-1.5 sm:space-y-2">
+                        {product.deliverables.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-600">
+                            <span className="p-0.5 sm:p-1 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
+                              <Check size={9} className="sm:w-2.5 sm:h-2.5 stroke-[3]" />
+                            </span>
+                            <span className="leading-relaxed font-medium">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -61,7 +61,7 @@ export default function App() {
   // Load products from localStorage or use defaults
   // Menggunakan versi migrasi agar data default hanya di-reset sekali saat ada update struktur,
   // dan TIDAK mereset ulang setiap kali user menghapus/mengubah produk dari CMS.
-  const PRODUCTS_VERSION = '3'; // Naikkan angka ini jika ingin paksa reset data ke default baru
+  const PRODUCTS_VERSION = '2'; // Naikkan angka ini jika ingin paksa reset data ke default baru
 
   useEffect(() => {
     const storedVersion = localStorage.getItem('edura_products_version');
@@ -157,7 +157,7 @@ export default function App() {
   }, [currentView]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcfcfd]">
+    <div className="min-h-screen flex flex-col bg-[#fcfcfd] overflow-x-hidden w-full">
       {/* Navigation */}
       <Navbar
         currentView={currentView}

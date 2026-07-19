@@ -90,13 +90,12 @@ export const defaultProducts = [
     techStack: ['Laravel', 'PHP', 'MySQL', 'Bootstrap', 'JS'],
     description: 'Aplikasi kasir (POS) berbasis web yang responsif, cepat, dan mudah digunakan untuk manajemen stok, penjualan, dan laporan keuangan toko Anda.',
     features: [
-      'Desain Modern & Responsif (Mobile Friendly)',
-      'Manajemen Produk & Inventaris',
-      'Transaksi Penjualan (Point of Sale/POS)',
-      'Dashboard Admin',
-      'Laporan Penjualan & Stok',
-      'Manajemen Pengguna & Hak Akses',
-      'Dukungan Teknis Selama 1 Bulan'
+      'Multi-outlet & multi-kasir',
+      'Manajemen stok barang real-time',
+      'Pencetakan struk penjualan (thermal printer)',
+      'Laporan penjualan harian, bulanan & tahunan',
+      'Grafik analisis keuntungan',
+      'Desain responsif untuk PC, Tablet & Mobile'
     ],
     deliverables: [
       'Full Source Code (Laravel PHP)',
