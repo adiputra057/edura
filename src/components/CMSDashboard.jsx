@@ -421,8 +421,8 @@ export default function CMSDashboard({ products, onAddProduct, onUpdateProduct, 
                     {uploadedImages.length > 0 ? (
                       <div className="grid grid-cols-3 gap-3">
                         {uploadedImages.map((imgSrc, idx) => (
-                          <div key={idx} className="relative aspect-[4/3] rounded-lg overflow-hidden group border border-gray-200 bg-white shadow-sm">
-                            <img src={imgSrc} className="w-full h-full object-cover" />
+                          <div key={idx} className="relative aspect-[16/9] rounded-lg overflow-hidden group border border-gray-200 bg-white shadow-sm">
+                            <img src={imgSrc} className="w-full h-full object-cover object-top" />
                             <button
                               type="button"
                               onClick={() => removeUploadedImage(idx)}

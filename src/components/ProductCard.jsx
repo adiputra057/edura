@@ -95,11 +95,11 @@ export default function ProductCard({ product, onOpenModal }) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group h-full">
       {/* Product Image Container */}
-      <div className="relative aspect-[4/3] w-full bg-gray-50 overflow-hidden">
+      <div className="relative aspect-[16/9] w-full bg-gray-50 overflow-hidden">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover select-none transform group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-top select-none transform group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[10px] font-extrabold text-primary-500 uppercase tracking-widest px-3 py-1.5 rounded-full border border-primary-100 shadow-sm">
           {product.category.split('&')[0].trim()}
