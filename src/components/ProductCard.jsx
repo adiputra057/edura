@@ -95,14 +95,27 @@ export default function ProductCard({ product, onOpenModal }) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group h-full">
       {/* Product Image Container */}
-      <div className="relative aspect-[16/9] w-full bg-gray-50 overflow-hidden">
+      <div 
+        onClick={() => onOpenModal(product)} 
+        className="relative aspect-[16/9] w-full bg-gray-50 overflow-hidden cursor-pointer group/img"
+      >
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover object-top select-none transform group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-top select-none transform group-hover/img:scale-105 transition-transform duration-500"
         />
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[10px] font-extrabold text-primary-500 uppercase tracking-widest px-3 py-1.5 rounded-full border border-primary-100 shadow-sm">
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[10px] font-extrabold text-primary-500 uppercase tracking-widest px-3 py-1.5 rounded-full border border-primary-100 shadow-sm z-10">
           {product.category.split('&')[0].trim()}
+        </div>
+        {/* Overlay preview prompt */}
+        <div className="absolute inset-0 bg-gray-900/30 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <span className="bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow border border-white/50 flex items-center gap-1.5">
+            <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            Lihat Detail
+          </span>
         </div>
       </div>
 

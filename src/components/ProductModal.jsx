@@ -87,6 +87,7 @@ export default function ProductModal({ product, onClose }) {
   if (!product) return null;
 
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
 
   // Autoplay slideshow carousel (every 3.5 seconds)
@@ -157,12 +158,21 @@ export default function ProductModal({ product, onClose }) {
             <div className="relative lg:col-span-7 bg-white flex items-center justify-center overflow-hidden h-[220px] sm:h-[320px] lg:min-h-[520px] group lg:border-r border-b lg:border-b-0 border-gray-100">
               
               {/* Image Frame */}
-              <div className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4">
+              <div 
+                onClick={() => setIsLightboxOpen(true)}
+                className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4 cursor-zoom-in group/zoom"
+              >
                 <img
                   src={images[currentIdx]}
                   alt={`${product.title} view ${currentIdx + 1}`}
-                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out"
+                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out group-hover/zoom:scale-102"
                 />
+                <div className="absolute bottom-3 right-3 bg-gray-900/70 backdrop-blur text-white text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover/zoom:opacity-100 transition-opacity pointer-events-none flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                  </svg>
+                  Perbesar Gambar
+                </div>
               </div>
 
               {/* Slider Arrows (Only show if multiple images exist) */}
@@ -327,6 +337,54 @@ export default function ProductModal({ product, onClose }) {
 
         </div>
       </div>
+
+      {/* Fullscreen Lightbox Modal */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-5 right-5 z-10 p-3 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+            aria-label="Tutup pratinjau"
+          >
+            <X size={24} />
+          </button>
+
+          <img
+            src={images[currentIdx]}
+            alt={`${product.title} full view`}
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl select-none animate-scale-up"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev(e);
+                }}
+                className="absolute left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext(e);
+                }}
+                className="absolute right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Next image"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
