@@ -152,26 +152,26 @@ export default function ProductModal({ product, onClose }) {
             <X size={18} />
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="flex flex-col w-full">
             
-            {/* Left: Product Images Slideshow */}
-            <div className="relative lg:col-span-7 bg-white flex items-center justify-center overflow-hidden h-[220px] sm:h-[320px] lg:min-h-[520px] group lg:border-r border-b lg:border-b-0 border-gray-100">
+            {/* Top: Product Images Slideshow */}
+            <div className="relative w-full bg-slate-900/5 flex items-center justify-center overflow-hidden h-[240px] sm:h-[360px] md:h-[450px] group border-b border-gray-100 flex-shrink-0">
               
               {/* Image Frame */}
               <div 
                 onClick={() => setIsLightboxOpen(true)}
-                className="w-full h-full absolute inset-0 bg-white flex items-center justify-center p-3 sm:p-4 cursor-zoom-in group/zoom"
+                className="w-full h-full absolute inset-0 bg-gray-50/50 flex items-center justify-center p-3 sm:p-5 cursor-zoom-in group/zoom"
               >
                 <img
                   src={images[currentIdx]}
                   alt={`${product.title} view ${currentIdx + 1}`}
-                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out group-hover/zoom:scale-102"
+                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out group-hover/zoom:scale-[1.02]"
                 />
-                <div className="absolute bottom-3 right-3 bg-gray-900/70 backdrop-blur text-white text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover/zoom:opacity-100 transition-opacity pointer-events-none flex items-center gap-1">
+                <div className="absolute bottom-3 right-3 bg-gray-900/70 backdrop-blur text-white text-[10px] sm:text-xs font-semibold px-3 py-1.5 rounded-xl opacity-0 group-hover/zoom:opacity-100 transition-opacity pointer-events-none flex items-center gap-1.5 shadow-lg">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                   </svg>
-                  Perbesar Gambar
+                  Klik untuk Perbesar Gambar
                 </div>
               </div>
 
@@ -180,24 +180,24 @@ export default function ProductModal({ product, onClose }) {
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-2 sm:left-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
+                    className="absolute left-2 sm:left-4 p-2 sm:p-3 rounded-full bg-white/80 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
                     aria-label="Previous image"
                   >
-                    <ChevronLeft size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
+                    <ChevronLeft size={18} className="sm:w-5 sm:h-5 stroke-[3]" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-2 sm:right-4 p-2 sm:p-3 rounded-full bg-white/70 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
+                    className="absolute right-2 sm:left-auto sm:right-4 p-2 sm:p-3 rounded-full bg-white/80 hover:bg-white backdrop-blur text-gray-800 shadow-md hover:shadow-lg transform active:scale-95 transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 z-10"
                     aria-label="Next image"
                   >
-                    <ChevronRight size={16} className="sm:w-5 sm:h-5 stroke-[3]" />
+                    <ChevronRight size={18} className="sm:w-5 sm:h-5 stroke-[3]" />
                   </button>
                 </>
               )}
 
               {/* Navigation Indicators (Dots at bottom) */}
               {images.length > 1 && (
-                <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+                <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
                   {images.map((_, index) => (
                     <button
                       key={index}
@@ -208,7 +208,7 @@ export default function ProductModal({ product, onClose }) {
                       className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                         currentIdx === index 
                           ? 'w-5 sm:w-6 bg-primary-500 shadow-sm shadow-primary-300' 
-                          : 'w-2 sm:w-2.5 bg-gray-300/60 hover:bg-gray-400'
+                          : 'w-2 sm:w-2.5 bg-gray-400/60 hover:bg-gray-500'
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -217,120 +217,125 @@ export default function ProductModal({ product, onClose }) {
               )}
             </div>
 
-            {/* Right: Content details */}
-            <div className="lg:col-span-5 p-5 sm:p-8 lg:p-10 flex flex-col justify-between">
-              <div className="space-y-4 sm:space-y-6">
-                <div>
-                  <span className="text-[10px] font-extrabold text-primary-500 uppercase tracking-widest bg-blue-50 border border-blue-100 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full">
+            {/* Bottom: All Content details below image */}
+            <div className="p-6 sm:p-8 md:p-10 flex flex-col space-y-6 text-left">
+              
+              {/* Header Title & Price */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-gray-100">
+                <div className="space-y-2">
+                  <span className="inline-block text-[10px] sm:text-xs font-extrabold text-primary-500 uppercase tracking-widest bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
                     {product.category}
                   </span>
-                  <h3 className="text-xl sm:text-3xl font-extrabold text-gray-900 mt-3 sm:mt-4 leading-tight" id="modal-title">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight" id="modal-title">
                     {product.title}
                   </h3>
-                  <p className="text-lg sm:text-2xl font-bold text-primary-500 mt-1.5 sm:mt-2">
+                </div>
+                <div className="sm:text-right flex-shrink-0">
+                  <span className="text-xs text-gray-400 font-semibold block">Harga Layanan</span>
+                  <p className="text-2xl sm:text-3xl font-extrabold text-primary-500">
                     {formatPrice(product.price)}
                   </p>
                 </div>
-
-                <div className="space-y-4 sm:space-y-5">
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-                    {product.description}
-                  </p>
-                  
-                  {/* Technology Stack Badges */}
-                  {product.techStack && product.techStack.length > 0 && (
-                    <div className="space-y-2">
-                      <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
-                        Teknologi Yang Digunakan:
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {product.techStack.map((tech) => {
-                          const info = TECH_MAP[tech] || {
-                            name: tech,
-                            color: 'bg-gray-50 text-gray-600 border-gray-100',
-                            icon: (
-                              <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                              </svg>
-                            )
-                          };
-                          return (
-                            <span
-                              key={tech}
-                              className={`inline-flex items-center text-[10px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border ${info.color}`}
-                            >
-                              {info.icon}
-                              {info.name}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Features list */}
-                  {product.features && product.features.length > 0 && (
-                    <div className="space-y-2 sm:space-y-3">
-                      <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
-                        Fitur & Layanan Utama:
-                      </p>
-                      <ul className="space-y-1.5 sm:space-y-2.5">
-                        {product.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-500">
-                            <span className="p-0.5 sm:p-1 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
-                              <Check size={10} className="sm:w-3 sm:h-3 stroke-[3]" />
-                            </span>
-                            <span className="leading-relaxed">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Deliverables - Yang Anda Dapatkan */}
-                  {product.deliverables && product.deliverables.length > 0 && (
-                    <div className="space-y-2 sm:space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-xl p-3 sm:p-4">
-                      <div className="flex items-center gap-2">
-                        <span className="p-1 sm:p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
-                          <Package size={12} className="sm:w-3.5 sm:h-3.5 stroke-[2.5]" />
-                        </span>
-                        <p className="text-[10px] sm:text-xs font-bold text-gray-900 uppercase tracking-wider">
-                          Yang Anda Dapatkan:
-                        </p>
-                      </div>
-                      <ul className="space-y-1.5 sm:space-y-2">
-                        {product.deliverables.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-xs text-gray-600">
-                            <span className="p-0.5 sm:p-1 rounded-full bg-amber-100/70 text-amber-600 flex-shrink-0 mt-0.5">
-                              <Check size={9} className="sm:w-2.5 sm:h-2.5 stroke-[3]" />
-                            </span>
-                            <span className="leading-relaxed font-medium">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
               </div>
 
+              {/* Description */}
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                {product.description}
+              </p>
+              
+              {/* Technology Stack Badges */}
+              {product.techStack && product.techStack.length > 0 && (
+                <div className="space-y-2.5">
+                  <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    Teknologi Yang Digunakan:
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.techStack.map((tech) => {
+                      const info = TECH_MAP[tech] || {
+                        name: tech,
+                        color: 'bg-gray-50 text-gray-600 border-gray-100',
+                        icon: (
+                          <svg className="w-3.5 h-3.5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                          </svg>
+                        )
+                      };
+                      return (
+                        <span
+                          key={tech}
+                          className={`inline-flex items-center text-xs font-bold px-3 py-1.5 rounded-xl border ${info.color}`}
+                        >
+                          {info.icon}
+                          {info.name}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Features list */}
+              {product.features && product.features.length > 0 && (
+                <div className="space-y-3 pt-2">
+                  <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    Fitur & Layanan Utama:
+                  </p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {product.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-600 bg-gray-50/70 border border-gray-100 p-2.5 rounded-xl">
+                        <span className="p-1 rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0 mt-0.5">
+                          <Check size={12} className="stroke-[3]" />
+                        </span>
+                        <span className="leading-relaxed font-medium">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Deliverables - Yang Anda Dapatkan */}
+              {product.deliverables && product.deliverables.length > 0 && (
+                <div className="space-y-3 bg-gradient-to-br from-amber-50/80 to-orange-50/60 border border-amber-100/80 rounded-2xl p-4 sm:p-5">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-amber-100/80 text-amber-600">
+                      <Package size={16} className="stroke-[2.5]" />
+                    </span>
+                    <p className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                      Yang Anda Dapatkan:
+                    </p>
+                  </div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {product.deliverables.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-gray-700">
+                        <span className="p-1 rounded-full bg-amber-100 text-amber-600 flex-shrink-0 mt-0.5">
+                          <Check size={10} className="stroke-[3]" />
+                        </span>
+                        <span className="leading-relaxed font-semibold">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Action area */}
-              <div className="mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-gray-100 flex flex-col gap-2 sm:gap-3">
+              <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleWhatsAppClick}
-                  className="flex items-center justify-center gap-2 w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold text-xs sm:text-sm px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+                  className="flex-1 flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-bold text-sm px-6 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  <MessageSquare size={14} className="sm:w-4 sm:h-4" />
+                  <MessageSquare size={18} />
                   Hubungi Kami di WhatsApp
                 </button>
                 
                 <button
                   onClick={onClose}
-                  className="w-full text-center text-[10px] sm:text-xs font-medium text-gray-400 hover:text-gray-600 py-1.5 sm:py-2 transition-colors"
+                  className="sm:w-auto px-6 py-4 text-center text-xs font-semibold text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors"
                 >
                   Kembali
                 </button>
               </div>
+
             </div>
 
           </div>
