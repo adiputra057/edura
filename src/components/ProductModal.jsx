@@ -142,12 +142,12 @@ export default function ProductModal({ product, onClose }) {
 
       {/* Modal contents wrapper */}
       <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 text-center">
-        <div className="relative transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-5xl my-4 sm:my-8 animate-scale-up border border-gray-100 max-h-[90vh] overflow-y-auto no-scrollbar">
+        <div className="relative transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left shadow-2xl transition-all w-full max-w-2xl my-4 sm:my-8 animate-scale-up border border-gray-100 max-h-[90vh] overflow-y-auto no-scrollbar">
           
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 sm:top-5 sm:right-5 z-20 p-2 sm:p-2.5 text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white backdrop-blur shadow-sm rounded-full transition-colors border border-gray-100"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2 text-gray-400 hover:text-gray-600 bg-white/90 hover:bg-white backdrop-blur shadow-sm rounded-full transition-colors border border-gray-100"
           >
             <X size={18} />
           </button>
@@ -155,19 +155,19 @@ export default function ProductModal({ product, onClose }) {
           <div className="flex flex-col w-full">
             
             {/* Top: Product Images Slideshow */}
-            <div className="relative w-full bg-slate-900/5 flex items-center justify-center overflow-hidden h-[240px] sm:h-[360px] md:h-[450px] group border-b border-gray-100 flex-shrink-0">
+            <div className="relative w-full aspect-[16/9] bg-gray-900/5 flex items-center justify-center overflow-hidden group border-b border-gray-100 flex-shrink-0">
               
               {/* Image Frame */}
               <div 
                 onClick={() => setIsLightboxOpen(true)}
-                className="w-full h-full absolute inset-0 bg-gray-50/50 flex items-center justify-center p-3 sm:p-5 cursor-zoom-in group/zoom"
+                className="w-full h-full absolute inset-0 bg-gray-50 flex items-center justify-center cursor-zoom-in group/zoom"
               >
                 <img
                   src={images[currentIdx]}
                   alt={`${product.title} view ${currentIdx + 1}`}
-                  className="w-full h-full object-contain select-none transition-all duration-500 ease-out group-hover/zoom:scale-[1.02]"
+                  className="w-full h-full object-cover object-top select-none transition-all duration-500 ease-out group-hover/zoom:scale-[1.02]"
                 />
-                <div className="absolute bottom-3 right-3 bg-gray-900/70 backdrop-blur text-white text-[10px] sm:text-xs font-semibold px-3 py-1.5 rounded-xl opacity-0 group-hover/zoom:opacity-100 transition-opacity pointer-events-none flex items-center gap-1.5 shadow-lg">
+                <div className="absolute bottom-3 right-3 bg-gray-900/75 backdrop-blur text-white text-[10px] sm:text-xs font-semibold px-3 py-1.5 rounded-xl opacity-0 group-hover/zoom:opacity-100 transition-opacity pointer-events-none flex items-center gap-1.5 shadow-lg z-10">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                   </svg>
